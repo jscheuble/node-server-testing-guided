@@ -20,12 +20,22 @@ server.get("/hobbits", (req, res) => {
     });
 });
 
+server.get("/hobbits/:id", (req, res) => {
+  Hobbits.findById(req.params.id)
+    .then((hobbit) => {
+      res.status(200).json(hobbit);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err });
+    });
+});
+
 server.post("/hobbits", (req, res) => {
   const hobbitInfo = req.body;
 
   Hobbits.insert(hobbitInfo)
-    .then((res) => {
-      res.status(201).json({ message: "success" });
+    .then((id) => {
+      res.status(201).json({ message: "success", id });
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
