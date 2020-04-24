@@ -34,8 +34,8 @@ server.post("/hobbits", (req, res) => {
   const hobbitInfo = req.body;
 
   Hobbits.insert(hobbitInfo)
-    .then((id) => {
-      res.status(201).json({ message: "success", id });
+    .then((hobbit) => {
+      res.status(201).json({ message: "success", hobbit });
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
